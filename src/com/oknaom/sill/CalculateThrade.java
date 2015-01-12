@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.oknaom.sill;
+
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+import org.optimization.CuttingStock;
+import static com.oknaom.sill.MainFrame.ResultsField;
+import static com.oknaom.sill.MainFrame.SegmentsTextPane;
+import static com.oknaom.sill.MainFrame.ValueTable;
+
+/**
+ *
+ * @author Виктор
+ */
+class CalculateThrade extends Thread {
+
+    static int[] sillSize;
+    static int[] sillAmount;
+    
+    void collectArray(){
+        DefaultTableModel model = (DefaultTableModel) ValueTable.getModel();
+        sillSize = new int[model.getRowCount()];
+        sillAmount = new int[model.getRowCount()];
+        for (int i = 0; i < model.getRowCount(); i++) {
+            int rowSize = model.getValueAt(i, 0).hashCode();
+            int rowAmount = model.getValueAt(i, 1).hashCode();
+            sillSize[i] = rowSize;
+            sillAmount[i] = rowAmount;
+        }
+    }
+    
+    void addCombination(String s){
+        SegmentsTextPane.setText(SegmentsTextPane.getText() + s);
+    }
+    
+    void goCutting(){
+        int i = 0;
+        Map<Integer, Integer> map;
+        CuttingStock cuttingStock = new CuttingStock(6001, sillSize, sillAmount);
+        while (cuttingStock.hasMoreCombinations()) {
+            addCombination("Отрезки хлыста № " + (++i) + "\n");
+            ResultsField.setText(String.valueOf(i));
+            map = cuttingStock.nextCombination();
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                Integer key = entry.getKey();
+                Integer value = entry.getValue();
+                addCombination(key + "  *  " + value + "\n");
+            }
+        }
+    }
+    
+    @Override
+    public void run() {
+        collectArray();
+        goCutting();
+    }
+}
