@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oknaom.sill;
+package om.okna.sill;
 
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import org.optimization.CuttingStock;
-import static com.oknaom.sill.MainFrame.ResultsField;
-import static com.oknaom.sill.MainFrame.SegmentsTextPane;
-import static com.oknaom.sill.MainFrame.ValueTable;
+import static om.okna.sill.MainFrame.ResultsField;
+import static om.okna.sill.MainFrame.SegmentsTextPane;
+import static om.okna.sill.MainFrame.ValueTable;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.optimization;
+package om.okna.sill;
 
 @SuppressWarnings("serial")
 public class InvalidLegthException extends RuntimeException {
