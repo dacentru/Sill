@@ -1,4 +1,4 @@
-package org.optimization;
+package om.okna.sill;
 
 import java.util.HashMap;
 import java.util.List;
